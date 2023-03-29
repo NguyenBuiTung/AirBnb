@@ -1,7 +1,7 @@
-@import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
-.profile {
-  font-family: cursive;
+.profile{
+font-family: cursive;
 }
+
 
 .emp-profile {
   padding: 3%;
@@ -10,15 +10,13 @@
   border-radius: 0.5rem;
   background: #fff;
 }
-
 .profile-img {
   text-align: center;
 }
-
 .profile-img img {
   width: 100%;
+//   height: 100%;
 }
-
 .profile-img .file {
   position: relative;
   overflow: hidden;
@@ -27,24 +25,20 @@
   border: none;
   border-radius: 0;
   font-size: 15px;
-  background: rgba(33, 37, 41, 0.7215686275);
+  background: #212529b8;
 }
-
 .profile-img .file input {
   position: absolute;
   opacity: 0;
   right: 0;
   top: 0;
 }
-
 .profile-head h5 {
   color: #333;
 }
-
 .profile-head h6 {
   color: #0062cc;
 }
-
 .profile-edit-btn {
   border: none;
   border-radius: 1.5rem;
@@ -54,118 +48,50 @@
   color: #6c757d;
   cursor: pointer;
 }
-
 .proile-rating {
   font-size: 12px;
   color: #818182;
   margin-top: 5%;
 }
-
 .proile-rating span {
   color: #495057;
   font-size: 15px;
   font-weight: 600;
 }
-
 .profile-head .nav-tabs {
   margin-bottom: 5%;
 }
-
 .profile-head .nav-tabs .nav-link {
   font-weight: 600;
   border: none;
 }
-
 .profile-head .nav-tabs .nav-link.active {
   border: none;
   border-bottom: 2px solid #0062cc;
 }
-
 .profile-work {
   padding: 14%;
   margin-top: -15%;
 }
-
 .profile-work p {
   font-size: 12px;
   color: #818182;
   font-weight: 600;
   margin-top: 10%;
 }
-
 .profile-work a {
   text-decoration: none;
   color: #495057;
   font-weight: 600;
   font-size: 14px;
 }
-
 .profile-work ul {
   list-style: none;
 }
-
 .profile-tab label {
   font-weight: 600;
 }
-
 .profile-tab p {
   font-weight: 600;
   color: #0062cc;
 }
-
-.home {
-  padding: 100px 0;
-}
-
-h2 {
-  font-family: cursive;
-  font-weight: 700 !important;
-  margin-bottom: 0px !important;
-  font-size: 20px !important;
-  line-height: 30px !important;
-  letter-spacing: normal !important;
-  padding-top: 2px !important;
-  padding-bottom: 2px !important;
-  color: #ff385c;
-}
-
-figure {
-  /*   width:30%; */
-  position: relative;
-  padding: 5px;
-}
-
-figure img {
-  width: 100%;
-  border-radius: 3px;
-}
-
-figcaption.inside {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-}
-
-figcaption.inside h2 {
-  color: white;
-}
-
-span {
-  display: block;
-}
-
-.text-desc {
-  font-size: 14px !important;
-  /*       font-size: 16px !important; */
-  line-height: 22px !important;
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  color: rgb(72, 72, 72) !important;
-  font-weight: normal !important;
-  margin-top: 0px !important;
-}
-
-.text-color {
-  color: rgb(255, 180, 0) !important;
-  font-size: 12px !important;
-}/*# sourceMappingURL=index.css.map */
