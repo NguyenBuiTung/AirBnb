@@ -11,10 +11,11 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { loginApi } from "../redux/user/userReducer";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+
 import { useNavigate } from "react-router-dom";
-// import { Modal } from "@mui/material";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+
 function Copyright(props) {
   return (
     <Typography
@@ -31,7 +32,6 @@ function Copyright(props) {
     </Typography>
   );
 }
-
 export const options = {
   position: "top-center",
   autoClose: 1000,
@@ -42,23 +42,22 @@ export const options = {
   progress: undefined,
   theme: "light",
 };
-
 const theme = createTheme();
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleSubmit = async (event) => {
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = async (data) => {
     try {
-      event.preventDefault();
-      const data = new FormData(event.currentTarget);
-      const action = loginApi({
-        email: data.get("email"),
-        password: data.get("password"),
-      });
+      const action = loginApi(data);
       await dispatch(action);
-      toast.success("Đăng nhập thành công", options);
-      navigate('/home')
-      window.location.reload()
+      navigate("/home");
+      window.location.reload();
     } catch (error) {
       toast.error(error.response.data.content, options);
     }
@@ -67,7 +66,7 @@ export default function Login() {
   return (
     <div className="login">
       <ThemeProvider theme={theme}>
-        <Container component="main" maxWidth="xs">
+        <Container component="div" maxWidth="xs">
           <CssBaseline />
           <Box
             sx={{
@@ -83,19 +82,28 @@ export default function Login() {
               alt=""
             />
             <Typography
-              component="h1"
-              variant="h5"
-              style={{ fontFamily: "serif" }}
+              // component="p"
+              variant="h4"
+              style={{ fontFamily: "cursive" }}
             >
               Đăng Nhập
             </Typography>
             <Box
               component="form"
-              onSubmit={handleSubmit}
+              onSubmit={handleSubmit(onSubmit)}
               noValidate
               sx={{ mt: 1 }}
             >
               <TextField
+                {...register("email", {
+                  required: "Vui lòng nhập email",
+                  pattern: {
+                    value:
+                      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    message: "Email chưa đúng định dạng",
+                  },
+                })}
+                aria-invalid={errors.email ? "true" : "false"}
                 margin="normal"
                 required
                 fullWidth
@@ -105,7 +113,20 @@ export default function Login() {
                 autoComplete="email"
                 autoFocus
               />
+              {errors.email?.message && (
+                <p
+                  style={{
+                    fontFamily: "cursive",
+                    fontSize: "14px",
+                    color: "red",
+                  }}
+                >
+                  {errors.email?.message}
+                </p>
+              )}
               <TextField
+                {...register("password", { required: true })}
+                aria-invalid={errors.password ? "true" : "false"}
                 margin="normal"
                 required
                 fullWidth
@@ -115,6 +136,18 @@ export default function Login() {
                 id="password"
                 autoComplete="current-password"
               />
+              {errors.password?.type === "required" && (
+                <p
+                  style={{
+                    fontFamily: "cursive",
+                    fontSize: "14px",
+                    color: "red",
+                  }}
+                  role="alert"
+                >
+                  Vui lòng điền mật khẩu
+                </p>
+              )}
               <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Lưu mật khẩu"
@@ -128,7 +161,7 @@ export default function Login() {
               >
                 Đăng Nhập
               </Button>
-              <ToastContainer />
+
               <p className="m-0" style={{ fontFamily: "cursive" }}>
                 hoặc
               </p>

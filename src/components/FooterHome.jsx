@@ -21,6 +21,7 @@ export default function FooterHome() {
   return (
     <div className="footerhome">
       <Sheet
+        style={{ margin: 0 }}
         variant="solid"
         color={color}
         invertedColors
@@ -62,10 +63,14 @@ export default function FooterHome() {
           </IconButton>
           <Divider orientation="vertical" />
           <IconButton variant="plain">
-            <FacebookRoundedIcon />
+            <a href="https://www.facebook.com/nguyenbuitung99" target="_blank">
+              <FacebookRoundedIcon />
+            </a>
           </IconButton>
           <IconButton variant="plain">
-            <GitHubIcon />
+            <a href="https://github.com/NguyenBuiTung" target="_blank">
+              <GitHubIcon />
+            </a>
           </IconButton>
           <Input
             variant="soft"
@@ -101,7 +106,7 @@ export default function FooterHome() {
               gap: 1,
             }}
           >
-            Tung
+            Nguyễn Bùi Tùng
           </Card>
           <List
             size="sm"
@@ -214,7 +219,6 @@ export default function FooterHome() {
           >
             Nguyễn Bùi Tùng
           </Typography>
-
           <Typography level="body3" sx={{ ml: "auto" }}>
             Copyright @2023 BOTAVN
           </Typography>

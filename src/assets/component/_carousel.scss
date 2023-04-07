@@ -1,0 +1,27 @@
+.carousel {
+  .MuiPaper-root {
+    .MuiContainer-root {
+      .MuiToolbar-root {
+        .MuiBox-root {
+          .MuiTabs-root {
+            .MuiButtonBase-root {
+              color: #000;
+            }
+            .MuiTabs-scroller {
+              .MuiTabs-flexContainer {
+                .MuiButtonBase-root {
+                  text-transform: none;
+                  font-size: 14px;
+                  font-family: cursive;
+                }
+              }
+              .MuiTabs-indicator {
+                background-color: #000;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

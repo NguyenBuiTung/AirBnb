@@ -1,0 +1,62 @@
+.room {
+ padding-top: 10px;
+ padding-bottom: 10px;
+  font-family: cursive;
+  .MuiBox-root {
+    .MuiGrid2-root {
+      padding: 10px 0;
+      // border-top: 1px solid gray;
+      .MuiGrid2-root {
+        h4 {
+          font-weight: 700;
+        }
+        .box-price {
+          font-size: 20px;
+        }
+      }
+      .MuiGrid2-root {
+        p {
+        }
+      }
+    }
+    .MuiGrid2-root {
+      h3 {
+      }
+      p {
+      }
+    }
+    h2 {
+    }
+    .MuiGrid2-root {
+      .title-h2 {
+        width: 100%;
+      }
+      .MuiGrid2-root {
+        .box-convenient {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 165px;
+          .MuiButtonBase-root {
+            flex: 1;
+            justify-content: end;
+          }
+        }
+      }
+    }
+  }
+  .MuiBox-root {
+    .MuiBox-root {
+      .MuiFormControl-root {
+        .MuiInputBase-root {
+          .MuiInputBase-input {
+            padding: 0;
+            height: 38px;
+          }
+        }
+      }
+      .MuiButtonBase-root {
+      }
+    }
+  }
+}

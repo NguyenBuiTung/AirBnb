@@ -1,32 +1,56 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Avatar } from "@mui/material";
+import { uploadApi } from "../redux/user/userReducer";
+import { Box, Button } from "@mui/material";
+import { Controller, useForm } from "react-hook-form";
+import FileUpload from "react-material-file-upload";
+import { toast } from "react-toastify";
+import { options } from "./Login";
 export default function Profile() {
   const { user } = useSelector(
     (state) => state.persistedReducer.userReducer.userLogin
   );
+
+  const dispatch = useDispatch();
   const [value, setValue] = React.useState(user.gender);
-  const handleChange = (event) => {
-    setValue(event.target.value);
+  const { control, handleSubmit } = useForm();
+  // const newImageUri =  "file:///" + imageUri.split("file:/").join("");
+  const onSubmit = async (image) => {
+    const formData = image.image;
+    console.log(formData);
+    try {
+      const action = uploadApi(formData[0]);
+      await dispatch(action);
+    } catch (error) {
+    toast.error('Chức năng này chưa fix được',options)
+    }
   };
 
   return (
     <div className="profile">
       <div className="container emp-profile">
-        <form method="post">
-          <div className="row">
+        <div method="post">
+          <div
+            className="row"
+            style={{
+              boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
+              borderRadius: "10px",
+              marginBottom: "8px",
+            }}
+          >
             <div className="col-md-4 d-flex align-items-center justify-content-center">
               <div className="profile-img">
-                <Avatar alt={user.name} src={user.avatar}   sx={{ width: 240, height: 240 }} />
-                {/* <div className="file btn btn-lg btn-primary">
-                  Change Photo
-                  <input type="file" name="file" />
-                </div> */}
+                <Avatar
+                  alt={user.name}
+                  src={user.avatar}
+                  sx={{ width: 240, height: 240 }}
+                />
               </div>
             </div>
             <div className="col-md-6">
@@ -42,7 +66,7 @@ export default function Profile() {
                       aria-labelledby="demo-controlled-radio-buttons-group"
                       name="controlled-radio-buttons-group"
                       value={value}
-                      onChange={handleChange}
+                      // onChange={handleChange}
                     >
                       <FormControlLabel
                         value="false"
@@ -75,15 +99,50 @@ export default function Profile() {
               </div>
             </div>
             <div className="col-md-2">
-              <input
-                type="submit"
-                className="profile-edit-btn"
-                name="btnAddMore"
-                defaultValue="Edit Profile"
-              />
+              <Box
+                component="form"
+                sx={{ paddingTop: 1 }}
+                noValidate
+                autoComplete="off"
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <Controller
+                  render={({ field: { value, onChange } }) => (
+                    <FileUpload
+                      value={value}
+                      onChange={onChange}
+                      multiple={false}
+                      accept={["image/jpeg", "image/png"]}
+                      title="Upload avatar mới (Max size: 7MB)"
+                      buttonText="Chọn Ảnh"
+                      maxSize={7340032}
+                      buttonProps={{
+                        variant: "outlined",
+                      }}
+                      typographyProps={{
+                        variant: "body2",
+                        color: "textSecondary",
+                      }}
+                    />
+                  )}
+                  control={control}
+                  name="image"
+                />
+                <Box sx={{ mt: 1, mb: 1, textAlign: "center" }}>
+                  <Button type="submit" variant="contained">
+                    UpLoad
+                  </Button>
+                </Box>
+              </Box>
             </div>
           </div>
-          <div className="row">
+          <div
+            className="row"
+            style={{
+              boxShadow: "rgba(0, 0, 0, 0.15) 0px 2px 8px",
+              borderRadius: "10px",
+            }}
+          >
             <div className="col-md-8">
               <div className="tab-content profile-tab" id="myTabContent">
                 <div
@@ -136,7 +195,7 @@ export default function Profile() {
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );

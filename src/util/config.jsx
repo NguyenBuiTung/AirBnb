@@ -53,8 +53,9 @@ export const settings = {
     }
     document.cookie = name + "=" + (value || "") + expires + "; path=/";
   },
-  delete_cookie:(name)=> {
-    document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+  delete_cookie: (name) => {
+    document.cookie =
+      name + "=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;";
   },
   getCookie: (name) => {
     var nameEQ = name + "=";
@@ -85,7 +86,7 @@ http.interceptors.request.use(
     config.headers = {
       ...config.headers,
       tokenCybersoft: TOKEN_CYBERSOFT,
-      Authorization: "Bearer " + settings.getCookie(ACCESSTOKEN),
+      token: settings.getCookie(ACCESSTOKEN),
     };
     return config;
   },

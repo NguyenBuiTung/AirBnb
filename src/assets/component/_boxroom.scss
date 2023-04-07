@@ -1,0 +1,42 @@
+.room-right {
+  .MuiContainer-root {
+    padding: 20px 24px;
+    .MuiBox-root {
+      margin-top: 0;
+      h4 {
+      }
+      .MuiBox-root {
+        .signup-form {
+          display: flex;
+          .MuiFormControl-root {
+            .MuiFormLabel-root {
+              font-size: 14px;
+            }
+            min-width: 0;
+            .MuiInputBase-root {
+              .MuiInputBase-input {
+                font-size: 14px;
+                padding: 10px 10px;
+              }
+              border-radius: 0;
+             
+            }
+          }
+        }
+        .MuiFormControl-root {
+          .MuiInputBase-root {
+            .MuiSelect-select {
+                display: flex;
+                align-items: center;
+                font-family: cursive;
+                padding: 10px 10px;
+            }
+            .MuiSelect-nativeInput {
+                
+            }
+          }
+        }
+      }
+    }
+  }
+}

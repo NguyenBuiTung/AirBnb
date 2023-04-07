@@ -1,7 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700");
-.home {
-  padding: 100px 0;
-}
 h2 {
     font-family: cursive;
     font-weight: 700 !important;
@@ -56,4 +53,12 @@ span {
 .text-color {
   color: rgb(255, 180, 0) !important;
   font-size: 12px !important;
+}
+.scroll-to-top {
+  display: flex !important;
+  border-radius: 20px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: #3CD500 !important;
+  box-shadow: 0 0px 14px 0 #49C628  !important;
 }

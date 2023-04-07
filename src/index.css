@@ -5,7 +5,7 @@
 
 .emp-profile {
   padding: 3%;
-  margin-top: 6%;
+  margin-top: 140px;
   margin-bottom: 3%;
   border-radius: 0.5rem;
   background: #fff;
@@ -113,10 +113,6 @@
   color: #0062cc;
 }
 
-.home {
-  padding: 100px 0;
-}
-
 h2 {
   font-family: cursive;
   font-weight: 700 !important;
@@ -168,4 +164,85 @@ span {
 .text-color {
   color: rgb(255, 180, 0) !important;
   font-size: 12px !important;
+}
+
+.scroll-to-top {
+  display: flex !important;
+  border-radius: 20px !important;
+  justify-content: center !important;
+  align-items: center !important;
+  background-color: #3CD500 !important;
+  box-shadow: 0 0px 14px 0 #49C628 !important;
+}
+
+.carousel .MuiPaper-root .MuiContainer-root .MuiToolbar-root .MuiBox-root .MuiTabs-root .MuiButtonBase-root {
+  color: #000;
+}
+.carousel .MuiPaper-root .MuiContainer-root .MuiToolbar-root .MuiBox-root .MuiTabs-root .MuiTabs-scroller .MuiTabs-flexContainer .MuiButtonBase-root {
+  text-transform: none;
+  font-size: 14px;
+  font-family: cursive;
+}
+.carousel .MuiPaper-root .MuiContainer-root .MuiToolbar-root .MuiBox-root .MuiTabs-root .MuiTabs-scroller .MuiTabs-indicator {
+  background-color: #000;
+}
+
+.room {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  font-family: cursive;
+}
+.room .MuiBox-root .MuiGrid2-root {
+  padding: 10px 0;
+}
+.room .MuiBox-root .MuiGrid2-root .MuiGrid2-root h4 {
+  font-weight: 700;
+}
+.room .MuiBox-root .MuiGrid2-root .MuiGrid2-root .box-price {
+  font-size: 20px;
+}
+.room .MuiBox-root .MuiGrid2-root .title-h2 {
+  width: 100%;
+}
+.room .MuiBox-root .MuiGrid2-root .MuiGrid2-root .box-convenient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 165px;
+}
+.room .MuiBox-root .MuiGrid2-root .MuiGrid2-root .box-convenient .MuiButtonBase-root {
+  flex: 1;
+  justify-content: end;
+}
+.room .MuiBox-root .MuiBox-root .MuiFormControl-root .MuiInputBase-root .MuiInputBase-input {
+  padding: 0;
+  height: 38px;
+}
+.room-right .MuiContainer-root {
+  padding: 20px 24px;
+}
+.room-right .MuiContainer-root .MuiBox-root {
+  margin-top: 0;
+}
+.room-right .MuiContainer-root .MuiBox-root .MuiBox-root .signup-form {
+  display: flex;
+}
+.room-right .MuiContainer-root .MuiBox-root .MuiBox-root .signup-form .MuiFormControl-root {
+  min-width: 0;
+}
+.room-right .MuiContainer-root .MuiBox-root .MuiBox-root .signup-form .MuiFormControl-root .MuiFormLabel-root {
+  font-size: 14px;
+}
+.room-right .MuiContainer-root .MuiBox-root .MuiBox-root .signup-form .MuiFormControl-root .MuiInputBase-root {
+  border-radius: 0;
+}
+.room-right .MuiContainer-root .MuiBox-root .MuiBox-root .signup-form .MuiFormControl-root .MuiInputBase-root .MuiInputBase-input {
+  font-size: 14px;
+  padding: 10px 10px;
+}
+.room-right .MuiContainer-root .MuiBox-root .MuiBox-root .MuiFormControl-root .MuiInputBase-root .MuiSelect-select {
+  display: flex;
+  align-items: center;
+  font-family: cursive;
+  padding: 10px 10px;
 }/*# sourceMappingURL=index.css.map */

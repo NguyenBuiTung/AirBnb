@@ -4,6 +4,7 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import userReducer from "./user/userReducer";
+import productRoom from "./product/productRoom";
 
 const persistConfig = {
   key: "data",
@@ -11,6 +12,7 @@ const persistConfig = {
 };
 export const rootReducers = combineReducers({
   userReducer,
+  productRoom
 });
 const persistedReducer = persistReducer(persistConfig, rootReducers);
 export const store = configureStore({
