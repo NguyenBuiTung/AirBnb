@@ -17,6 +17,9 @@ import HomeTemPlate from "./templates/HomeTemPlate";
 import { PrivateRouter } from "./components/PrivateRouter";
 import ReponsiveItem from "./Hoc/ReponsiveItem";
 import DetailMobile from "./pages/DetailMobile";
+import Loading from "./components/Loading";
+
+
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Detail = React.lazy(() => import("./pages/Detail"));
@@ -28,7 +31,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <Provider store={store}>
     <HistoryRouter history={history}>
-      <React.Suspense fallback={<div>Loading...</div>}>
+      <React.Suspense fallback={<div><Loading/></div>}>
         <Routes>
           <Route path="/" element={<HomeTemPlate />}>
             <Route index element={<Home />}></Route>
