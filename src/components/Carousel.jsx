@@ -14,22 +14,18 @@ import DeckOutlinedIcon from "@mui/icons-material/DeckOutlined";
 import ApartmentOutlinedIcon from "@mui/icons-material/ApartmentOutlined";
 import { getDataAreaApi } from "../redux/product/productRoom";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 export default function Carousel() {
   const [value, setValue] = React.useState(0);
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const handleChange = async (event, newValue) => {
     try {
       const action = getDataAreaApi(newValue);
       await dispatch(action);
       setValue(newValue);
       // navigate("/area");
-     
-    } catch (error) {
-      
-    }
-   
+    } catch (error) {}
   };
   return (
     <div className="carousel">

@@ -9,11 +9,14 @@ import {
   unstable_HistoryRouter as HistoryRouter,
   Route,
   Routes,
+  Navigate
 } from "react-router-dom";
 import { createBrowserHistory } from "history";
 import { store } from "./redux/configStores";
 import HomeTemPlate from "./templates/HomeTemPlate";
 import { PrivateRouter } from "./components/PrivateRouter";
+import ReponsiveItem from "./Hoc/ReponsiveItem";
+import DetailMobile from "./pages/DetailMobile";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Detail = React.lazy(() => import("./pages/Detail"));
@@ -31,9 +34,8 @@ root.render(
             <Route index element={<Home />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/room">
-              <Route path=":id" element={<Detail />}></Route>
+              <Route path=":id" element={<ReponsiveItem component={Detail} mobileComponent={DetailMobile} />}></Route>
             </Route>
-
             <Route path="/login" element={<Login />}></Route>
             <Route path='/' element={<PrivateRouter />}>
               <Route path="/profile" element={<Profile />}></Route>
@@ -41,10 +43,11 @@ root.render(
             </Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/payment" element={<Payment />}></Route>
+            <Route path="*" element={<Navigate to={""} />}></Route>
           </Route>
         </Routes>
         <ToastContainer />
       </React.Suspense>
-    </HistoryRouter>s
+    </HistoryRouter>
   </Provider>
 );

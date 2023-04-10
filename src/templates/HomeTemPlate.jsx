@@ -10,7 +10,6 @@ export default function HomeTemPlate() {
       <HeaderHome />
       <Outlet></Outlet>
       <ScrollToTop
-       
         smooth
         component={<RocketSharpIcon style={{ color: "#E80505" }} />}
       />

@@ -14,12 +14,12 @@ import TableRestaurantOutlinedIcon from "@mui/icons-material/TableRestaurantOutl
 import Paper from "@mui/material/Paper";
 import { useForm } from "react-hook-form";
 import Button from "@mui/material/Button";
-// import CssBaseline from "@mui/material/CssBaseline";
+
 import TextField from "@mui/material/TextField";
 
 import { DateField } from "@mui/x-date-pickers/DateField";
 
-import {toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import dayjs from "dayjs";
 
@@ -30,13 +30,26 @@ import { Avatar, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { commentApi } from "../redux/product/productRoom";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import BoxRoom from "../components/BoxRoom";
 import { options } from "./Login";
-
-
-export default function Detail() {
- 
+// import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+// import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  borderRadius:'20px'
+};
+export default function DetailMobile() {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const { listRoomDetail } = useSelector(
     (state) => state.persistedReducer.productRoom
   );
@@ -49,13 +62,13 @@ export default function Detail() {
   const dispatch = useDispatch();
   const [value, setValue] = React.useState();
   let formattedDate = moment(value).format("DD/MM/YYYY");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const {
     register,
     // formState: { errors },
     handleSubmit,
   } = useForm();
-  const [fullName, setFullName] = useState('');
+  const [fullName, setFullName] = useState("");
   const onSubmitComment = async (data) => {
     try {
       const comment = {
@@ -68,7 +81,7 @@ export default function Detail() {
       };
       const action = commentApi(comment);
       await dispatch(action);
-      setFullName('');
+      setFullName("");
     } catch (error) {
       // console.log(error)
       toast.error("Vui lòng đăng nhập để bình luận", options);
@@ -77,113 +90,119 @@ export default function Detail() {
   return (
     <div className="container room">
       <img className="w-100" src={listRoomDetail.hinhAnh} alt="" />
-      <div style={{ display: "flex", justifyContent: "flex-start" }}>
-        <div className="room-left" style={{ width: "70%", padding: "0 10px" }}>
-          <Box sx={{ flexGrow: 1 }}>
-            <Grid container>
-              <Grid
-                xs={12}
-                md={6}
-                lg={6}
-                xl={6}
-                style={{ padding: "10px 10px" }}
-              >
-                <h4>{listRoomDetail.tenPhong}</h4>
-                <p className="box-price">{listRoomDetail.giaTien}$</p>
-              </Grid>
-              <Grid
-                xs={12}
-                md={6}
-                lg={6}
-                xl={6}
-                style={{ padding: "10px 10px" }}
-              >
-                <p>Khach:{listRoomDetail.khach}</p>
-                <p>Phong ngủ:{listRoomDetail.phongNgu}</p>
-                <p>Giường:{listRoomDetail.giuong}</p>
-                <p>Phòng tắm:{listRoomDetail.phongTam}</p>
-              </Grid>
+      <div>
+        <Box sx={{ flexGrow: 1 }}>
+          <Grid container>
+            <Grid xs={12} md={6} lg={6} xl={6} style={{ padding: "10px 10px" }}>
+              <h4>{listRoomDetail.tenPhong}</h4>
+              <p className="box-price">{listRoomDetail.giaTien}$</p>
             </Grid>
-            <Grid container spacing={2}>
-              <h2 style={{ width: "100%" }}>Thông tin thêm về căn hộ</h2>
-              <p>{listRoomDetail.moTa}</p>
+            <Grid xs={12} md={6} lg={6} xl={6} style={{ padding: "10px 10px" }}>
+              <p>Khach:{listRoomDetail.khach}</p>
+              <p>Phong ngủ:{listRoomDetail.phongNgu}</p>
+              <p>Giường:{listRoomDetail.giuong}</p>
+              <p>Phòng tắm:{listRoomDetail.phongTam}</p>
             </Grid>
+          </Grid>
+          <Grid container spacing={2}>
+            <h2 style={{ width: "100%" }}>Thông tin thêm về căn hộ</h2>
+            <p>{listRoomDetail.moTa}</p>
+          </Grid>
 
-            <Grid container spacing={2}>
-              <h2 className="title-h2">Nơi này có gì cho bạn</h2>
-              <Grid sm={6} xl={6} lg={6} md={6} xs={12}>
-                <p className="box-convenient">
-                  <WashOutlinedIcon />: Máy giặt
-                  <Checkbox
-                    checked={listRoomDetail.mayGiat}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-                <p className="box-convenient">
-                  <IronOutlinedIcon />: Bàn là{" "}
-                  <Checkbox
-                    checked={listRoomDetail.banLa}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-                <p className="box-convenient">
-                  <OndemandVideoOutlinedIcon />: Ti vi{" "}
-                  <Checkbox
-                    checked={listRoomDetail.tivi}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-                <p className="box-convenient">
-                  <HvacOutlinedIcon />: Điều hòa{" "}
-                  <Checkbox
-                    checked={listRoomDetail.dieuHoa}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-                <p className="box-convenient">
-                  <WifiOutlinedIcon />: Wifi{" "}
-                  <Checkbox
-                    checked={listRoomDetail.wifi}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-              </Grid>
-              <Grid sm={6} xl={6} lg={6} md={6} xs={12}>
-                <p className="box-convenient">
-                  <KitchenOutlinedIcon />: Bếp{" "}
-                  <Checkbox
-                    checked={listRoomDetail.bep}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-                <p className="box-convenient">
-                  <LocalParkingOutlinedIcon />: Đỗ xe{" "}
-                  <Checkbox
-                    checked={listRoomDetail.doXe}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-                <p className="box-convenient">
-                  <PoolOutlinedIcon />: Hồ bơi{" "}
-                  <Checkbox
-                    checked={listRoomDetail.hoBoi}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-                <p className="box-convenient">
-                  <TableRestaurantOutlinedIcon />: Bàn ủi{" "}
-                  <Checkbox
-                    checked={listRoomDetail.banUi}
-                    inputProps={{ "aria-label": "controlled" }}
-                  />
-                </p>
-              </Grid>
+          <Grid container spacing={2}>
+            <h2 className="title-h2">Nơi này có gì cho bạn</h2>
+            <Grid sm={6} xl={6} lg={6} md={6} xs={12}>
+              <p className="box-convenient">
+                <WashOutlinedIcon />: Máy giặt
+                <Checkbox
+                  checked={listRoomDetail.mayGiat}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+              <p className="box-convenient">
+                <IronOutlinedIcon />: Bàn là{" "}
+                <Checkbox
+                  checked={listRoomDetail.banLa}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+              <p className="box-convenient">
+                <OndemandVideoOutlinedIcon />: Ti vi{" "}
+                <Checkbox
+                  checked={listRoomDetail.tivi}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+              <p className="box-convenient">
+                <HvacOutlinedIcon />: Điều hòa{" "}
+                <Checkbox
+                  checked={listRoomDetail.dieuHoa}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+              <p className="box-convenient">
+                <WifiOutlinedIcon />: Wifi{" "}
+                <Checkbox
+                  checked={listRoomDetail.wifi}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
             </Grid>
-          </Box>
+            <Grid sm={6} xl={6} lg={6} md={6} xs={12}>
+              <p className="box-convenient">
+                <KitchenOutlinedIcon />: Bếp{" "}
+                <Checkbox
+                  checked={listRoomDetail.bep}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+              <p className="box-convenient">
+                <LocalParkingOutlinedIcon />: Đỗ xe{" "}
+                <Checkbox
+                  checked={listRoomDetail.doXe}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+              <p className="box-convenient">
+                <PoolOutlinedIcon />: Hồ bơi{" "}
+                <Checkbox
+                  checked={listRoomDetail.hoBoi}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+              <p className="box-convenient">
+                <TableRestaurantOutlinedIcon />: Bàn ủi{" "}
+                <Checkbox
+                  checked={listRoomDetail.banUi}
+                  inputProps={{ "aria-label": "controlled" }}
+                />
+              </p>
+            </Grid>
+          </Grid>
+        </Box>
+        <div>
+          <Button
+            style={{ backgroundColor: "#FB335B" }}
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleOpen}
+          >
+            Đặt phòng
+          </Button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              <BoxRoom />
+            </Box>
+          </Modal>
         </div>
-        <div className="room-right" style={{ width: "30%", padding: "10px 10px" }}>
-          <BoxRoom/>
-        </div>
+       
       </div>
       <Box
         sx={{
@@ -211,7 +230,7 @@ export default function Detail() {
                 autoComplete="noiDung"
                 autoFocus
                 style={{ margin: "0px" }}
-                onChange={event => setFullName(event.target.value)}
+                onChange={(event) => setFullName(event.target.value)}
                 value={fullName}
               />
             </Grid>

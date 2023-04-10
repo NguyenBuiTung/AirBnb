@@ -10,13 +10,18 @@ import { useEffect } from "react";
 import { deleteUserBoxApi, userBoxRoomApi } from "../redux/user/userReducer";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
-import { Box, Button, Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 import { toast } from "react-toastify";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
+// import Button from '@mui/material/Button';
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogTitle from "@mui/material/DialogTitle";
 import { options } from "./Login";
 export default function Payment() {
   const { user } = useSelector(
@@ -30,18 +35,28 @@ export default function Payment() {
   const handleChange = (event) => {
     setValue(event.target.value);
   };
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const dispatch = useDispatch();
   useEffect(() => {
     const action = userBoxRoomApi(user.id);
     dispatch(action);
-  });
-  const deleteBoxRoom = async (id) => {
+  }, []);
+  const deleteBoxRoom = async (item) => {
     // console.log(id)
     try {
-      const action = deleteUserBoxApi(id);
+      const action = deleteUserBoxApi(item);
       await dispatch(action);
       toast.success("Huỷ chuyến đi thành công", options);
+      handleClose();
     } catch (error) {
       toast.error(error.response.data.content);
     }
@@ -104,12 +119,10 @@ export default function Payment() {
                         <TableCell align="right">{row.soLuongKhach}</TableCell>
                         <TableCell align="right">
                           <Button
-                            onClick={() => {
-                              deleteBoxRoom(row.id);
-                            }}
-                            type="submit"
-                            // fullWidth
                             variant="contained"
+                            onClick={handleClickOpen}
+                            type="submit"
+                            // variant="contained"
                             sx={{
                               mt: 3,
                               mb: 2,
@@ -119,6 +132,33 @@ export default function Payment() {
                           >
                             Hủy chuyến đi
                           </Button>
+                          <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                          >
+                            <DialogTitle id="alert-dialog-title">
+                              Bạn có chắc chắn muốn hủy chuyến đi này không?
+                            </DialogTitle>
+                            <DialogContent>
+                              <DialogContentText id="alert-dialog-description">
+                                Nếu như bạn hủy chuyến đi này rất có thể bạn sẽ
+                                không thể đặt lại vì hết phòng !
+                              </DialogContentText>
+                            </DialogContent>
+                            <DialogActions>
+                              <Button onClick={handleClose}>Không hủy</Button>
+                              <Button
+                                onClick={() => {
+                                  deleteBoxRoom(row);
+                                }}
+                                autoFocus
+                              >
+                                Hủy
+                              </Button>
+                            </DialogActions>
+                          </Dialog>
                         </TableCell>
                       </TableRow>
                     ))}
@@ -137,7 +177,14 @@ export default function Payment() {
                 borderRadius: "4px",
               }}
             >
-              <div style={{ display: "flex", flexDirection: "column",padding:'20px 20px',fontFamily:'cursive' }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  padding: "20px 20px",
+                  fontFamily: "cursive",
+                }}
+              >
                 <h3>Chọn cách thanh toán</h3>
                 <FormControl>
                   <RadioGroup

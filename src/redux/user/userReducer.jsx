@@ -52,9 +52,10 @@ export const userBoxRoomApi = (maNguoiDung) => {
     dispatch(action);
   };
 };
-export const deleteUserBoxApi = (id) => {
+export const deleteUserBoxApi = (item) => {
   return async (dispatch) => {
-    await http.delete(`/api/dat-phong/${id}`);
-    getDataUserBoxAction();
+    await http.delete(`/api/dat-phong/${item.id}`);
+    const action = userBoxRoomApi(item.maNguoiDung);
+    dispatch(action);
   };
 };

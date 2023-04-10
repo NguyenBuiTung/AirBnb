@@ -5,7 +5,7 @@ import {
   Button,
   Container,
   CssBaseline,
-  InputLabel,
+  // InputLabel,
   TextField,
   createTheme,
 } from "@mui/material";
@@ -24,12 +24,12 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { boxRoomApi } from "../redux/user/userReducer";
-import { toast } from "react-toastify";
-import { options } from "../pages/Login";
+// import { toast } from "react-toastify";
+// import { options } from "../pages/Login";
 import { useNavigate } from "react-router-dom";
 const schema = yup.object().shape({
-  form1: yup.string().nullable(),
-  form2: yup.string().nullable(),
+  form1: yup.string().nullable(true),
+  form2: yup.string().nullable(true),
 });
 
 export default function BoxRoom() {
@@ -65,10 +65,9 @@ export default function BoxRoom() {
       //   console.log(boxRoom);
       const action = boxRoomApi(boxRoom);
       await dispatch(action);
-      toast.success("Đặt phòng thành công", options);
       navigate("/payment");
     } catch (error) {
-      toast.error(error.response.data.ngayDi[0], options);
+      // navigate("/login");
     }
   };
   return (
@@ -86,7 +85,7 @@ export default function BoxRoom() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            // marginTop: 8,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
