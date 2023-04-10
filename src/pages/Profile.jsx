@@ -7,9 +7,8 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Avatar } from "@mui/material";
 import { uploadApi } from "../redux/user/userReducer";
-import { Box, Button } from "@mui/material";
-import { Controller, useForm } from "react-hook-form";
-import FileUpload from "react-material-file-upload";
+
+// import FileUpload from "react-material-file-upload";
 import { toast } from "react-toastify";
 import { options } from "./Login";
 export default function Profile() {
@@ -19,18 +18,18 @@ export default function Profile() {
 
   const dispatch = useDispatch();
   const [value, setValue] = React.useState(user.gender);
-  const { control, handleSubmit } = useForm();
+  // const { control, handleSubmit } = useForm();
   // const newImageUri =  "file:///" + imageUri.split("file:/").join("");
-  const onSubmit = async (image) => {
-    const formData = image.image;
-    console.log(formData);
-    try {
-      const action = uploadApi(formData[0]);
-      await dispatch(action);
-    } catch (error) {
-    toast.error('Chức năng này chưa fix được',options)
-    }
-  };
+  // const onSubmit = async (image) => {
+  //   const formData = image.image;
+  //   console.log(formData);
+  //   try {
+  //     const action = uploadApi(formData[0]);
+  //     await dispatch(action);
+  //   } catch (error) {
+  //   toast.error('Chức năng này chưa fix được',options)
+  //   }
+  // };
 
   return (
     <div className="profile">
@@ -98,43 +97,7 @@ export default function Profile() {
                 </ul>
               </div>
             </div>
-            <div className="col-md-2">
-              <Box
-                component="form"
-                sx={{ paddingTop: 1 }}
-                noValidate
-                autoComplete="off"
-                onSubmit={handleSubmit(onSubmit)}
-              >
-                <Controller
-                  render={({ field: { value, onChange } }) => (
-                    <FileUpload
-                      value={value}
-                      onChange={onChange}
-                      multiple={false}
-                      accept={["image/jpeg", "image/png"]}
-                      title="Upload avatar mới (Max size: 7MB)"
-                      buttonText="Chọn Ảnh"
-                      maxSize={7340032}
-                      buttonProps={{
-                        variant: "outlined",
-                      }}
-                      typographyProps={{
-                        variant: "body2",
-                        color: "textSecondary",
-                      }}
-                    />
-                  )}
-                  control={control}
-                  name="image"
-                />
-                <Box sx={{ mt: 1, mb: 1, textAlign: "center" }}>
-                  <Button type="submit" variant="contained">
-                    UpLoad
-                  </Button>
-                </Box>
-              </Box>
-            </div>
+            <div className="col-md-2"></div>
           </div>
           <div
             className="row"
