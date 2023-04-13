@@ -17,14 +17,10 @@ import Button from "@mui/material/Button";
 // import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 
-import { DateField } from "@mui/x-date-pickers/DateField";
+// import { DateField } from "@mui/x-date-pickers/DateField";
 
-import {toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import dayjs from "dayjs";
-
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 // import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Avatar, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,9 +30,7 @@ import { useNavigate } from "react-router-dom";
 import BoxRoom from "../components/BoxRoom";
 import { options } from "./Login";
 
-
 export default function Detail() {
- 
   const { listRoomDetail } = useSelector(
     (state) => state.persistedReducer.productRoom
   );
@@ -56,7 +50,7 @@ export default function Detail() {
     // formState: { errors },
     handleSubmit,
   } = useForm();
-  const [fullName, setFullName] = useState('');
+  const [fullName, setFullName] = useState("");
   const onSubmitComment = async (data) => {
     try {
       const comment = {
@@ -69,7 +63,7 @@ export default function Detail() {
       };
       const action = commentApi(comment);
       await dispatch(action);
-      setFullName('');
+      setFullName("");
     } catch (error) {
       // console.log(error)
       toast.error("Vui lòng đăng nhập để bình luận", options);
@@ -182,8 +176,11 @@ export default function Detail() {
             </Grid>
           </Box>
         </div>
-        <div className="room-right" style={{ width: "30%", padding: "10px 10px" }}>
-          <BoxRoom/>
+        <div
+          className="room-right"
+          style={{ width: "30%", padding: "10px 10px" }}
+        >
+          <BoxRoom />
         </div>
       </div>
       <Box
@@ -212,11 +209,11 @@ export default function Detail() {
                 autoComplete="noiDung"
                 autoFocus
                 style={{ margin: "0px" }}
-                onChange={event => setFullName(event.target.value)}
+                onChange={(event) => setFullName(event.target.value)}
                 value={fullName}
               />
             </Grid>
-       
+
             <Grid xl={4} md={12}>
               <Button
                 style={{ marginLeft: 10, margin: "0px" }}

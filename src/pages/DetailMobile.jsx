@@ -17,25 +17,17 @@ import Button from "@mui/material/Button";
 
 import TextField from "@mui/material/TextField";
 
-import { DateField } from "@mui/x-date-pickers/DateField";
-
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import dayjs from "dayjs";
 
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-// import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { Avatar, Divider } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import { commentApi } from "../redux/product/productRoom";
-// import { useNavigate } from "react-router-dom";
+
 import BoxRoom from "../components/BoxRoom";
 import { options } from "./Login";
-// import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import Typography from "@mui/material/Typography";
+
 import Modal from "@mui/material/Modal";
 const style = {
   position: "absolute",
@@ -44,7 +36,7 @@ const style = {
   transform: "translate(-50%, -50%)",
   width: 400,
   bgcolor: "background.paper",
-  borderRadius:'20px'
+  borderRadius: "20px",
 };
 export default function DetailMobile() {
   const [open, setOpen] = React.useState(false);
@@ -202,7 +194,6 @@ export default function DetailMobile() {
             </Box>
           </Modal>
         </div>
-       
       </div>
       <Box
         sx={{
@@ -234,11 +225,7 @@ export default function DetailMobile() {
                 value={fullName}
               />
             </Grid>
-            <Grid xl={4} md={12}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField value={value} defaultValue={dayjs(formattedDate)} />
-              </LocalizationProvider>
-            </Grid>
+      
             <Grid xl={4} md={12}>
               <Button
                 style={{ marginLeft: 10, margin: "0px" }}

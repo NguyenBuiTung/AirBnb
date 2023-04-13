@@ -33,10 +33,10 @@ export const loginApi = (user) => {
   // console.log(user);
   return async (dispatch) => {
     const result = await http.post("/api/auth/signin", user);
+    // console.log(result.data.content.user);
     const action = getReducerLoginAction(result.data.content);
     dispatch(action);
-    // const actionProfile = profileUserApi(user.id);
-    // dispatch(actionProfile);
+    // settings.setCookieJson('userLogin',result.data.content.user);
     settings.setCookie(ACCESSTOKEN, result.data.content.token, 1 / 24);
   };
 };

@@ -66,9 +66,10 @@ export default function HeaderHome() {
     setAnchorElUser(null);
   };
   const Logout = () => {
-    persistor.pause();
+    
+    persistor.pause();  
     persistor.flush().then(() => {
-      settings.delete_cookie("token");
+     settings.delete_cookie("token");
       window.location.href = "/home";
       return persistor.purge();
     });

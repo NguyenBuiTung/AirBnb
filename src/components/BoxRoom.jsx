@@ -37,6 +37,7 @@ export default function BoxRoom() {
   const { listRoomDetail } = useSelector(
     (state) => state.persistedReducer.productRoom
   );
+  // console.log(listRoomDetail)
   const { user } = useSelector(
     (state) => state.persistedReducer.userReducer.userLogin
   );
