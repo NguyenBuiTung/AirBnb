@@ -48,7 +48,8 @@ export default function Detail() {
   );
   const dispatch = useDispatch();
   const [value, setValue] = React.useState();
-  let formattedDate = moment(value).format("DD/MM/YYYY");
+  const formattedDate = moment(value).format("DD/MM/YYYY");
+  // console.log(formattedDate)
   const navigate = useNavigate();
   const {
     register,
@@ -215,11 +216,7 @@ export default function Detail() {
                 value={fullName}
               />
             </Grid>
-            <Grid xl={4} md={12}>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DateField value={value} defaultValue={dayjs(formattedDate)} />
-              </LocalizationProvider>
-            </Grid>
+       
             <Grid xl={4} md={12}>
               <Button
                 style={{ marginLeft: 10, margin: "0px" }}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -6,31 +6,38 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { Avatar } from "@mui/material";
-import { uploadApi } from "../redux/user/userReducer";
-
-// import FileUpload from "react-material-file-upload";
+import { profileUserApi, uploadApi } from "../redux/user/userReducer";
 import { toast } from "react-toastify";
+import Button from "@mui/material/Button";
 import { options } from "./Login";
+// import IconButton from "@mui/material/IconButton";
 export default function Profile() {
+  const { profileUser } = useSelector(
+    (state) => state.persistedReducer.userReducer
+  );
   const { user } = useSelector(
     (state) => state.persistedReducer.userReducer.userLogin
   );
-
+  useEffect(() => {
+    const action = profileUserApi(user.id);
+    dispatch(action);
+  }, []);
   const dispatch = useDispatch();
   const [value, setValue] = React.useState(user.gender);
-  // const { control, handleSubmit } = useForm();
-  // const newImageUri =  "file:///" + imageUri.split("file:/").join("");
-  // const onSubmit = async (image) => {
-  //   const formData = image.image;
-  //   console.log(formData);
-  //   try {
-  //     const action = uploadApi(formData[0]);
-  //     await dispatch(action);
-  //   } catch (error) {
-  //   toast.error('Chức năng này chưa fix được',options)
-  //   }
-  // };
-
+  const [file, setFile] = useState(false);
+  const handleInputChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+  const upload = async (e) => {
+    const formData = new FormData();
+    formData.append("formFile", file);
+    try {
+      const action = uploadApi(formData);
+      await dispatch(action);
+    } catch (error) {
+      toast.error(error.response.data.content, options);
+    }
+  };
   return (
     <div className="profile">
       <div className="container emp-profile">
@@ -46,16 +53,16 @@ export default function Profile() {
             <div className="col-md-4 d-flex align-items-center justify-content-center">
               <div className="profile-img">
                 <Avatar
-                  alt={user.name}
-                  src={user.avatar}
+                  alt={profileUser.name}
+                  src={profileUser.avatar}
                   sx={{ width: 240, height: 240 }}
                 />
               </div>
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <div className="profile-head">
-                <h5>{user.name}</h5>
-                <h6>{user.role}</h6>
+                <h5>{profileUser.name}</h5>
+                <h6>{profileUser.role}</h6>
                 <div className="proile-rating">
                   <FormControl>
                     <FormLabel id="demo-controlled-radio-buttons-group">
@@ -65,7 +72,6 @@ export default function Profile() {
                       aria-labelledby="demo-controlled-radio-buttons-group"
                       name="controlled-radio-buttons-group"
                       value={value}
-                      // onChange={handleChange}
                     >
                       <FormControlLabel
                         value="false"
@@ -97,7 +103,18 @@ export default function Profile() {
                 </ul>
               </div>
             </div>
-            <div className="col-md-2"></div>
+            <div className="col-md-4">
+              <div>
+                <h2>Đổi avatar</h2>
+                <br />
+                <input type="file" onChange={handleInputChange} />
+                <br />
+                <br />
+                <Button variant="contained" component="label" onClick={upload}>
+                  Upload
+                </Button>
+              </div>
+            </div>
           </div>
           <div
             className="row"
@@ -119,7 +136,7 @@ export default function Profile() {
                       <label>ID</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{user.id}</p>
+                      <p>{profileUser.id}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -127,7 +144,7 @@ export default function Profile() {
                       <label>Tên</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{user.name}</p>
+                      <p>{profileUser.name}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -135,7 +152,7 @@ export default function Profile() {
                       <label>Email</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{user.email}</p>
+                      <p>{profileUser.email}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -143,7 +160,7 @@ export default function Profile() {
                       <label>Số điện thoại</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{user.phone}</p>
+                      <p>{profileUser.phone}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -151,7 +168,7 @@ export default function Profile() {
                       <label>Ngày sinh</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{user.birthday}</p>
+                      <p>{profileUser.birthday}</p>
                     </div>
                   </div>
                 </div>

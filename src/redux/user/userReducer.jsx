@@ -4,6 +4,7 @@ import { ACCESSTOKEN, http, settings } from "../../util/config";
 const initialState = {
   userLogin: [],
   userBoxRoom: [],
+  profileUser: [],
 };
 
 const userReducer = createSlice({
@@ -16,11 +17,17 @@ const userReducer = createSlice({
     getDataUserBoxAction: (state, action) => {
       state.userBoxRoom = action.payload;
     },
+    getDataProfileUser: (state, action) => {
+      state.profileUser = action.payload;
+    },
   },
 });
 
-export const { getReducerLoginAction, getDataUserBoxAction } =
-  userReducer.actions;
+export const {
+  getReducerLoginAction,
+  getDataUserBoxAction,
+  getDataProfileUser,
+} = userReducer.actions;
 export default userReducer.reducer;
 export const loginApi = (user) => {
   // console.log(user);
@@ -28,6 +35,8 @@ export const loginApi = (user) => {
     const result = await http.post("/api/auth/signin", user);
     const action = getReducerLoginAction(result.data.content);
     dispatch(action);
+    // const actionProfile = profileUserApi(user.id);
+    // dispatch(actionProfile);
     settings.setCookie(ACCESSTOKEN, result.data.content.token, 1 / 24);
   };
 };
@@ -36,11 +45,18 @@ export const boxRoomApi = (data) => {
     await http.post("/api/dat-phong", data);
   };
 };
-export const uploadApi = (img) => {
-  console.log(img);
+export const profileUserApi = (id) => {
   return async (dispatch) => {
-    await http.post("/api/users/upload-avatar", img);
-    getReducerLoginAction();
+    const result = await http.get(`/api/users/${id}`);
+    const action = getDataProfileUser(result.data.content);
+    dispatch(action);
+  };
+};
+export const uploadApi = (img) => {
+  return async (dispatch) => {
+    const result = await http.post("/api/users/upload-avatar", img);
+    const action = getDataProfileUser(result.data.content);
+    dispatch(action);
   };
 };
 export const userBoxRoomApi = (maNguoiDung) => {

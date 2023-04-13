@@ -19,6 +19,7 @@ import { ACCESSTOKEN, settings } from "../util/config";
 // import Carousel from "./Carousel";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataListRoomApi } from "../redux/product/productRoom";
+// import { profileUserApi } from "../redux/user/userReducer";
 const style = {
   position: "absolute",
   top: "50%",
@@ -61,6 +62,9 @@ export default function HeaderHome() {
   };
   const OpenAndClose = () => {
     setAnchorElUser(null);
+    // console.log(user.id)
+    // const action = profileUserApi(user.id);
+    // dispatch(action);
     navigate("/profile");
   };
   const Logout = () => {

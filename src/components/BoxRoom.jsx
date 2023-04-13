@@ -57,12 +57,12 @@ export default function BoxRoom() {
       const boxRoom = {
         id: user.id,
         maPhong: listRoomDetail.id,
-        ngayDen: `${moment(data.form1).format("DD-MM-YYYY")}`,
-        ngayDi: `${moment(data.form2).format("DD-MM-YYYY")}`,
+        ngayDen: `${moment(data.form1).format("YYYY-MM-DD")}`,
+        ngayDi: `${moment(data.form2).format("YYYY-MM-DD")}`,
         soLuongKhach: ref.current === undefined ? 1 : ref.current,
         maNguoiDung: user.id,
       };
-      //   console.log(boxRoom);
+        console.log(boxRoom);
       const action = boxRoomApi(boxRoom);
       await dispatch(action);
       navigate("/payment");
