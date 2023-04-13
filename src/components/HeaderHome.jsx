@@ -61,11 +61,9 @@ export default function HeaderHome() {
     handleCloseUserMenu();
   };
   const OpenAndClose = () => {
-    setAnchorElUser(null);
-    // console.log(user.id)
-    // const action = profileUserApi(user.id);
-    // dispatch(action);
+   
     navigate("/profile");
+    setAnchorElUser(null);
   };
   const Logout = () => {
     persistor.pause();

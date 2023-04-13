@@ -62,7 +62,7 @@ export default function BoxRoom() {
         soLuongKhach: ref.current === undefined ? 1 : ref.current,
         maNguoiDung: user.id,
       };
-        console.log(boxRoom);
+        // console.log(boxRoom);
       const action = boxRoomApi(boxRoom);
       await dispatch(action);
       navigate("/payment");

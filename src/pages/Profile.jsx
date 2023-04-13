@@ -53,7 +53,7 @@ export default function Profile() {
             <div className="col-md-4 d-flex align-items-center justify-content-center">
               <div className="profile-img">
                 <Avatar
-                  alt={profileUser.name}
+                 
                   src={profileUser.avatar}
                   sx={{ width: 240, height: 240 }}
                 />
