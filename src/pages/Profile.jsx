@@ -19,11 +19,11 @@ export default function Profile() {
     (state) => state.persistedReducer.userReducer.userLogin
   );
   useEffect(() => {
-    const action = profileUserApi(user.id);
+    const action = profileUserApi(user?.id);
     dispatch(action);
   }, []);
   const dispatch = useDispatch();
-  const [value, setValue] = React.useState(user.gender);
+  const [value, setValue] = React.useState(user?.gender);
   const [file, setFile] = useState(false);
   const handleInputChange = (event) => {
     setFile(event.target.files[0]);
@@ -54,15 +54,15 @@ export default function Profile() {
               <div className="profile-img">
                 <Avatar
                  
-                  src={profileUser.avatar}
+                  src={profileUser?.avatar}
                   sx={{ width: 240, height: 240 }}
                 />
               </div>
             </div>
             <div className="col-md-4">
               <div className="profile-head">
-                <h5>{profileUser.name}</h5>
-                <h6>{profileUser.role}</h6>
+                <h5>{profileUser?.name}</h5>
+                <h6>{profileUser?.role}</h6>
                 <div className="proile-rating">
                   <FormControl>
                     <FormLabel id="demo-controlled-radio-buttons-group">
@@ -136,7 +136,7 @@ export default function Profile() {
                       <label>ID</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{profileUser.id}</p>
+                      <p>{profileUser?.id}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -144,7 +144,7 @@ export default function Profile() {
                       <label>Tên</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{profileUser.name}</p>
+                      <p>{profileUser?.name}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -152,7 +152,7 @@ export default function Profile() {
                       <label>Email</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{profileUser.email}</p>
+                      <p>{profileUser?.email}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -160,7 +160,7 @@ export default function Profile() {
                       <label>Số điện thoại</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{profileUser.phone}</p>
+                      <p>{profileUser?.phone}</p>
                     </div>
                   </div>
                   <div className="row">
@@ -168,7 +168,7 @@ export default function Profile() {
                       <label>Ngày sinh</label>
                     </div>
                     <div className="col-md-6">
-                      <p>{profileUser.birthday}</p>
+                      <p>{profileUser?.birthday}</p>
                     </div>
                   </div>
                 </div>
